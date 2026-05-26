@@ -1,0 +1,53 @@
+---
+// This frontmatter code fence must exist for Astro to compile properly!
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <!-- FIXED: Path to public folder changed to root / -->
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Minimal Heaven</title>
+        
+        <style>
+            .box {
+                width: 200px; /* Increased size so text fits a bit better */
+                height: 200px;
+                background: black;
+                color: white; /* Added so you can read your text on a black background */
+                padding: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <label style="display: block; margin-bottom: 20px;">
+            <input type="checkbox" id="toggle-box" /> Toggle GSAP Animation
+        </label>
+
+        <div class="box">
+            <h1>Minimal Heaven</h1>
+            <p>Welcome to Minimal Heaven.</p>
+        </div>
+
+        <script>
+            import { gsap } from "gsap";
+
+            const element = document.querySelector(
+                '[type="checkbox"]'
+            ) as HTMLInputElement;
+
+            element?.addEventListener("change", () => {
+                if (element.checked) {
+                    gsap.to(".box", { rotation: 360, duration: 2 });
+                } else {
+                    gsap.to(".box", { rotation: 0, duration: 2 });
+                }
+            });
+
+        </script>
+    </body>
+</html>
