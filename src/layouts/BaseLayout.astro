@@ -1,0 +1,47 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Minimal Heaven",
+  description = "Welcome to Minimal Heaven.",
+  image,
+} = Astro.props as Props;
+
+const path = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const ogImage = image
+  ? new URL(image, Astro.site ?? Astro.url).toString()
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={path} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={path} />
+
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <title>{title}</title>
+
+  </head>
+    <body>
+        <slot />
+    </body>
+</html>
+
+
+<style lang="scss" is:global>
+  @use '../styles/global.scss';
+</style>
