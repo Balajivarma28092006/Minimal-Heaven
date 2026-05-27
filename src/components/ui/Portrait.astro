@@ -1,0 +1,23 @@
+---
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	class?: string;
+}
+
+const { src, alt, caption, class: className = '' } = Astro.props;
+---
+
+<figure class:list={['m-0', className]}>
+	<img
+		src={src}
+		alt={alt}
+		width="800"
+		height="600"
+		class="img-bw block h-auto w-full"
+		loading="eager"
+		decoding="async"
+	/>
+	{caption && <figcaption class="mt-2 text-xs text-text-dim">{caption}</figcaption>}
+</figure>

@@ -1,0 +1,84 @@
+---
+import { Fragment } from "astro/jsx-runtime";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const posts: CollectionEntry<"posts">[] = (
+  await getCollection(
+    "posts",
+    ({ data }: CollectionEntry<"posts">) => !data.draft,
+  )
+).sort(
+  (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
+    +b.data.date - +a.data.date,
+);
+
+const fmt = (d: Date): string =>
+  `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth() + 1).padStart(
+    2,
+    "0",
+  )}.${d.getFullYear()}`;
+
+const renderHeadline = (headline: string, emphasis?: string): string => {
+  if (!emphasis) return headline;
+  return headline.replace("{emphasis}", `__${emphasis}__`);
+};
+---
+
+<PageLayout
+  title="The Blog"
+  eyebrow="Journal"
+  description="Essays, Techincal field notes."
+>
+  <div class="post-list">
+    {
+      posts.map((post) => {
+        const parts: string[] = renderHeadline(
+          post.data.headline,
+          post.data.emphasis,
+        ).split("__");
+
+        return (
+          <a class="post-card" href={`/blog/${post.id}`}>
+            <div class="post-card__cover">
+              <img src={post.data.cover} alt="" loading="lazy" />
+            </div>
+
+            <div>
+              <div class="post-card__meta">
+                {fmt(post.data.date)} · {post.data.author} ·{" "}
+                {post.data.readTime}
+              </div>
+
+              <h2 class="post-card__title">
+                {post.data.emphasis
+                  ? post.data.headline.split("{emphasis}").map((part, i) =>
+                      i === 1 ? (
+                        <>
+                          <span>{post.data.emphasis}</span>
+                          {part}
+                        </>
+                      ) : (
+                        part
+                      ),
+                    )
+                  : post.data.headline}
+              </h2>
+
+              <p class="post-card__excerpt">{post.data.excerpt}</p>
+
+              {post.data.tags.length > 0 && (
+                <div class="post-card__tags">
+                  {post.data.tags.map((tag: string) => (
+                    <span>{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</PageLayout>

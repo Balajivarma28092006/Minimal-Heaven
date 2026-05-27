@@ -1,13 +1,23 @@
 ---
+import { getCollection } from 'astro:content';
 import Menu from "../components/Menu.astro";
+import Sidebar from '../components/Sidebar.astro';
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageLayout from "../layouts/PageLayout.astro";
+import About from './About.astro';
 
+const posts = await getCollection('posts', ({ data }) => data.featured);
+const featured = await getCollection('featured');
+
+const pinned = posts[0];
+posts.sort((a, b) => +b.data.date - +a.data.date);
 ---
 
 <BaseLayout>
-    <Menu />
-    <PageLayout title="Welcome to Minimal Heaven" description="A personal website built with Astro and Tailwind CSS.">
-        <p>Hi there! I'm Balaji, a software developer passionate about building beautiful and functional web applications. This is my personal website where I share my projects, blog posts, and experience. Feel free to explore and get in touch!</p>
-    </PageLayout>
+    <div class="blog">
+        <Menu />
+        <div class="blog-part blog-center-pane">
+            <About />
+        </div>
+        <Sidebar entries={featured} />
+    </div>
 </BaseLayout>

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #121418;
+  --color-text-muted: #94918f;
+}
