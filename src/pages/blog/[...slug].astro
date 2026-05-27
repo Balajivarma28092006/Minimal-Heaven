@@ -1,9 +1,16 @@
 ---
+import type { GetStaticPaths } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 
-export async function getStaticPaths() {
+interface Props {
+  post: CollectionEntry<'posts'>;
+  prev?: CollectionEntry<'posts'>;
+  next?: CollectionEntry<'posts'>;
+}
+
+export const getStaticPaths = (async () => {
   const posts: CollectionEntry<'posts'>[] = (
     await getCollection(
       'posts',
@@ -24,12 +31,12 @@ export async function getStaticPaths() {
       next: posts[i - 1],
     },
   }));
-}
+}) satisfies GetStaticPaths;
 
-const { post, prev, next } = Astro.props;
+const { post, prev, next } = Astro.props as Props;
 const { Content } = await render(post);
 
-const fmt = (d: Date) =>
+const fmt = (d: Date): string =>
   `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
 ---
 

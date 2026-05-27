@@ -1,7 +1,4 @@
-@use "sass:color";
-
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-// @import "tailwindcss";
 
 * {
   outline: none;
@@ -19,6 +16,17 @@ img {
 
 a {
   color: inherit;
+}
+
+.editorial-link {
+  color: #121418;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.img-bw {
+  filter: grayscale(1);
 }
 
 $title-font: "Space Grotesk", sans-serif;
@@ -193,8 +201,10 @@ body {
   }
 
   &-header {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
   }
 
   &-article {
@@ -295,20 +305,13 @@ body {
     font-style: italic;
   }
 }
-.blog-header {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
 .blog-pane {
   padding: 2rem;
   min-height: 100%;
 }
 
 .blog-pane:not(:last-child) {
-  border-right: 1px solid var(--border);
+  border-right: 1px solid $border-color;
 }
 
 /* LEFT */
@@ -363,7 +366,7 @@ body {
 
 .meta-block {
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid $border-color;
 }
 
 .meta-label {
@@ -386,8 +389,13 @@ body {
 
   .blog-pane:not(:last-child) {
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid $border-color;
   }
+}
+
+.blog-center-pane {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .blog-header-container {
@@ -1044,10 +1052,17 @@ html {
     margin: 0 0 10px;
     color: $title-color;
 
+    em,
     span {
       font-family: $italic-font;
       font-style: italic;
       font-weight: 400;
+    }
+
+    .post-card__headline {
+      font: inherit;
+      color: inherit;
+      letter-spacing: inherit;
     }
   }
 
@@ -1216,6 +1231,26 @@ html {
   }
 }
 
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+
+  a {
+    border: 1px solid $border-color;
+    color: $subtitle-color;
+    padding: 8px 14px;
+    text-decoration: none;
+
+    &:hover {
+      background: $body-bg;
+      border-color: $body-bg;
+      color: $blog-bg;
+    }
+  }
+}
+
 /* ---------- Work grid ---------- */
 
 .work-grid {
@@ -1262,6 +1297,57 @@ html {
     font-size: 15px;
     line-height: 1.4;
     max-width: 40ch;
+  }
+}
+
+/* ---------- Project grid ---------- */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: $border-color;
+  border: 1px solid $border-color;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-item {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: $blog-bg;
+  color: inherit;
+  padding: 24px;
+  text-decoration: none;
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: $italic-font;
+    font-size: 13px;
+    font-style: italic;
+    color: $subtitle-color;
+  }
+
+  h2 {
+    font-family: $title-font;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin: auto 0 0;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0;
   }
 }
 

@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const work: CollectionEntry<"work">[] = (
+  await getCollection("work")
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout
+  title="Work"
+  eyebrow="Experience"
+  description="Selected issues, projects, and systems work."
+>
+  <div class="work-grid">
+    {
+      work.map((item) => {
+        const content = (
+          <>
+            <img src={item.data.cover} alt="" loading="lazy" />
+            <div class="work-item__year">{item.data.year}</div>
+            <h2 class="work-item__title">{item.data.title}</h2>
+            <p class="work-item__summary">{item.data.summary}</p>
+          </>
+        );
+
+        return item.data.url ? (
+          <a class="work-item" href={item.data.url} target="_blank" rel="noreferrer">
+            {content}
+          </a>
+        ) : (
+          <article class="work-item">{content}</article>
+        );
+      })
+    }
+  </div>
+</PageLayout>

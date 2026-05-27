@@ -1,71 +1,14 @@
 ---
-import SectionHeading from './../components/ui/SectionHeading.astro';
-import { site } from './../config/site';
+import AboutSection from "../components/sections/AboutSection.astro";
+import Portrait from "../components/ui/Portrait.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 ---
 
-<section id="about" class="scroll-mt-14 border-t border-ink">
-	<div class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
-
-		<SectionHeading
-			title="About"
-			label="Profile"
-			id="about-heading"
-		/>
-
-		<div class="grid gap-0 border border-ink md:grid-cols-3">
-
-			<!-- LEFT PANE -->
-			<div
-				class="border-b border-ink p-8 md:border-b-0 md:border-r"
-				data-reveal
-			>
-				<h3 class="mb-6 font-serif text-2xl italic">
-					Building reliable systems
-				</h3>
-
-				<p class="text-sm leading-relaxed text-text-muted">
-					I work on backend systems where correctness,
-					latency, and maintainability matter.
-					My interests span low-level programming,
-					concurrency, networking, and Linux tooling.
-				</p>
-			</div>
-
-			<!-- CENTER PANE -->
-			<div
-				class="border-b border-ink p-8 md:border-b-0 md:border-r"
-				data-reveal
-			>
-				<div class="space-y-5">
-					{
-						site.about.map((paragraph) => (
-							<p class="text-sm leading-relaxed text-text-muted">
-								{paragraph}
-							</p>
-						))
-					}
-				</div>
-			</div>
-
-			<!-- RIGHT PANE -->
-			<aside class="p-8" data-reveal>
-				<h3 class="mb-6 font-serif text-xl italic text-text-muted">
-					Areas of Focus
-				</h3>
-
-				<ul class="space-y-4">
-					{
-						site.interests.map((interest) => (
-							<li
-								class="border-b border-ink pb-3 text-sm text-text-muted"
-							>
-								{interest}
-							</li>
-						))
-					}
-				</ul>
-			</aside>
-
-		</div>
-	</div>
-</section>
+<PageLayout
+  title="About"
+  eyebrow="Profile"
+  description="Backend and systems engineering work, interests, and current focus."
+>
+    <Portrait src="./../../../dist/favicon.svg" alt="balaji image"/>
+  <AboutSection />
+</PageLayout>

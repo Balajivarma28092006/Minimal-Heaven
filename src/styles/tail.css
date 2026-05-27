@@ -2,5 +2,7 @@
 
 @theme {
   --color-ink: #121418;
+  --color-bg: #e9e6e4;
   --color-text-muted: #94918f;
+  --font-display: "Space Grotesk", sans-serif;
 }

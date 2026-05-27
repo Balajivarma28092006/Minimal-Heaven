@@ -1,0 +1,25 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { site } from "../config/site";
+---
+
+<PageLayout
+  title="Projects"
+  eyebrow="Builds"
+  description="A small selection of backend, systems, and tooling projects."
+>
+  <div class="project-grid">
+    {
+      site.pinnedRepos.map((project) => (
+        <a class="project-item" href={project.url} target="_blank" rel="noreferrer">
+          <div class="project-item__meta">
+            <span>{project.language}</span>
+            <span>{project.stars} stars</span>
+          </div>
+          <h2>{project.name}</h2>
+          <p>{project.description}</p>
+        </a>
+      ))
+    }
+  </div>
+</PageLayout>

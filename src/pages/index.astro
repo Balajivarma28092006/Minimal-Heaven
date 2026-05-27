@@ -3,20 +3,16 @@ import { getCollection } from 'astro:content';
 import Menu from "../components/Menu.astro";
 import Sidebar from '../components/Sidebar.astro';
 import BaseLayout from "../layouts/BaseLayout.astro";
-import About from './About.astro';
+import AboutSection from "../components/sections/AboutSection.astro";
 
-const posts = await getCollection('posts', ({ data }) => data.featured);
 const featured = await getCollection('featured');
-
-const pinned = posts[0];
-posts.sort((a, b) => +b.data.date - +a.data.date);
 ---
 
 <BaseLayout>
     <div class="blog">
         <Menu />
         <div class="blog-part blog-center-pane">
-            <About />
+            <AboutSection />
         </div>
         <Sidebar entries={featured} />
     </div>
