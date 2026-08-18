@@ -1,17 +1,16 @@
 ---
-
-title: 'Building a TUI in Go: From Command-Line Flags to Interactive Interfaces'
+title: 'Building TUI Applications With Go'
 bigTitle: 'Interfaces'
 emphasis: 'Building'
-headline: 'Building {emphasis} Interfaces In Go'
-excerpt: 'A practical look at building terminal user interfaces in Go, parsing command-line flags with the standard library, and turning a simple command into an interactive tool.'
+headline: 'Building {emphasis} Interfaces With Go'
+excerpt: 'A practical journey through building terminal user interfaces in Go, parsing command-line flags with the standard library, and turning a simple CLI into an interactive application.'
 author: 'Scarlett Witch'
 readTime: '8 Min Read'
 date: 2026-08-18
-cover: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=70'
+cover: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=1600&q=70'
 featured: true
 tags: ['golang', 'tui', 'cli', 'terminal', 'flags']
----------------------------------------------------
+---
 
 The terminal has never really been just a place to run commands.
 
